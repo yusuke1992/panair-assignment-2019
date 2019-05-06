@@ -1,0 +1,59 @@
+{% extends "management/base.html" %}
+
+{% block content %}
+    <h1>レポート</h1>
+    
+    <p>ジャンルと性別別</p>
+    <table>
+      <thead>
+        <th>カリキュラム名</th>
+        <th>性別</th>
+        <th>レッスン数</th>
+        <th>受講者数</th>
+        <th>売上</th>
+      </thead>
+      <tbody>
+        {% for reportline in report_by_gender %}
+          <tr>
+            <td>{{ reportline.curriculum_name}}</td>
+            {% if reportline.user_gender == 1 %}
+              <td>男性</td>
+            {% else %}
+              <td>女性</td>
+            {% endif %}
+            <td>{{ reportline.records_count }}回</td>
+            <td>{{ reportline.users_count }}人</td>
+            <td> {{ reportline.sum_charge }}円</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <p>ジャンルと年齢層別</p>
+    <table>
+      <thead>
+        <th>カリキュラム名</th>
+        <th>性別</th>
+        <th>年齢層別</th>
+        <th>レッスン数</th>
+        <th>受講者数</th>
+        <th>売上</th>
+      </thead>
+      <tbody>
+        {% for reportline in report_by_generation %}
+          <tr>
+            <td>{{ reportline.curriculum_name }}</td>
+            {% if reportline.user_gender == 1 %}
+              <td>男性</td>
+            {% else %}
+              <td>女性</td>
+            {% endif %}
+            <td>{{ reportline.user_generation }} 代</td>
+            <td>{{ reportline.records_count }}回</td>
+            <td>{{ reportline.users_count }}人</td>
+            <td>{{ reportline.sum_charge }}円</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <a href="{% url 'management:home' %}">ホームへ</a>
+{% endblock content %}

@@ -1,0 +1,15 @@
+{% extends "management/base.html" %}
+
+{% block content %}
+  <h4>受講者の編集</h4>
+  {% if user_id %}
+  <form action="{% url 'management:user_mod' user_id=user_id　%}" method="post">
+  {% else %}
+  <form action="{% url 'management:user_new'%}" method="post">
+  {% endif %}
+    {% csrf_token %}
+    {{ form.as_ul }}
+    <button type="submit">登録</button>
+    </form>
+    <a href="{% url 'management:user_index' %}">戻る</a>
+{% endblock content %}
