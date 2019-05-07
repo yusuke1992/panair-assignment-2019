@@ -30,6 +30,7 @@ class Record(models.Model):
     MaxValueValidator(12)])
     charge = models.IntegerField('支払い金額',default = 0)
 
+
 class Invoice:
     def __init__(self, user):
         self.user = user
@@ -39,9 +40,8 @@ class Invoice:
         curriculum_list = []
         for record in self.records:
             curriculum_list.append(record.curriculum.name)
-            curriculum_counting = Counter(curriculum_list)
-            
-        return curriculum_counting, 
+            curriculum_count = Counter(curriculum_list)
+        return curriculum_count, 
 
     # def counting_subjects(self, curriculum_list):
     #     (curriculum_list)
@@ -50,21 +50,24 @@ class Invoice:
     def charge(self):
         return sum([ record.charge for record in self.records ])
 
+    # def discount(self):
+    #     if record.curriculum.name == "英語" and record.time 
+
 class Report:
     records_ally = []
 
     def __init__(self, **kwargs):
         self.records_ally = [ record for record in Record.objects.filter(**kwargs) ]
 
+    @property
+    def users(self):
+        return list(set([ record.user for record in self.records_ally ]))
+
     def records_count(self):
         return len(self.records_ally)
 
     def curriculums(self):
         return list(set([ record.curriculum for record in self.records_ally ]))
-
-    @property
-    def users(self):
-        return list(set([ record.user for record in self.records_ally ]))
 
     def users_count(self):
         return len(self.users)
