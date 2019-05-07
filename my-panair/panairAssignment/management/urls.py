@@ -15,7 +15,7 @@ urlpatterns = [
     path('record/new',      views.record_edit,   name='record_add'),
     path('record/<int:record_id>', views.record_edit,  name='record_mod'),
 
-    path('invoices', views.invoice_index, name='invoice_index'),
+    path('invoices', views.invoices_index, name='invoices'),
 
-    path('reports', views.report_index, name='report_index')
+    path('reports', views.reports_index, name='reports')
 ]
