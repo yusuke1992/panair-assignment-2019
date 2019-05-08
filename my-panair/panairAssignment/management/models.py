@@ -49,6 +49,9 @@ class Invoice:
 
     def charge(self):
         return sum([ record.charge for record in self.records ])
+    
+    # def discount(self):
+    #     if record.curriculum.name == "英語" and record.time 
 
     # def discount(self):
     #     if record.curriculum.name == "英語" and record.time 
